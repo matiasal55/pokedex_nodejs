@@ -1,0 +1,73 @@
+<div class="container">
+    <div>
+        <form action="/" method="POST" class="container mb-3">
+            <div class="row m-1">
+                <input type="text" class="form-control col-sm-12 col-md-9" name="entrada"
+                    placeholder="Ingrese el nombre, tipo o número de Pokémon">
+                <button class="btn btn-primary col-sm-12 col-md-3" type="submit">Quién es este Pokémon?</button>
+            </div>
+        </form>
+    </div>
+    <h5>{{message}}</h5>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th class="text-center">Imagen</th>
+                    <th class="text-center">Tipo</th>
+                    <th class="text-center">Número</th>
+                    <th class="text-center">Nombre</th>
+                    {{#if sesion}}
+                    <th class="text-center">Acciones</th>
+                    {{/if}}
+                </tr>
+            </thead>
+            <tbody>
+                {{#each datos}}
+                <tr>
+                    <td class="align-middle align-middle text-center"><img src="{{imagen}}" alt="{{nombre}}"
+                            style="width: 50px;height:50px"></td>
+                    <td class="align-middle text-center"><img src="images/{{tipo}}.png" alt="{{tipo}}"
+                            style="width: 50px;height:50px"></td>
+                    <td class="align-middle text-center"><a href="/personajes/{{id_pokemon}}">{{id_pokemon}}</a></td>
+                    <td class="align-middle text-center"><a href="/personajes/{{id_pokemon}}">{{nombre}}</a></td>
+                    {{#if ../sesion}}
+                    <td class="align-middle">
+                        <div class="d-flex justify-content-center">
+                            <a href="/modificar/{{id_pokemon}}" class="btn btn-primary">Modificar</a>
+                            <button type="button" class="btn btn-danger ml-1" data-toggle="modal"
+                                data-target="#exampleModal" data-name="{{nombre}}" data-id="{{id_pokemon}}">Borrar
+                            </button>
+                        </div>
+                    </td>
+                    {{/if}}
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+    {{#if sesion}}
+    <div>
+        <a href="/nuevo" class="btn btn-success btn-block">Nuevo Pokémon</a>
+    </div>
+    {{/if}}
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Alerta</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ¿Está seguro que quiere eliminar este dato?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Volver</button>
+                    <a href="#" class="btn btn-danger modal-link">Borrar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
